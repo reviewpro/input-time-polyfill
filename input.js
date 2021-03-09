@@ -1,159 +1,190 @@
-import thePicker from './picker.js';
-import locales from './locales.js';
-import dateFormat from './dateformat.js';
+import timePicker from "./timePicker.js";
 
 export default class Input {
   constructor(input) {
     this.element = input;
     this.element.setAttribute(`data-has-picker`, ``);
+    this.element.readOnly = true;
 
-    this.locale =
-      this.element.getAttribute(`lang`)
-      || document.body.getAttribute(`lang`)
-      || `en`;
+    let selectedPart = -1;
 
-    this.format = this.element.getAttribute('date-format')
-      || document.body.getAttribute('date-format')
-      || this.element.getAttribute(`data-date-format`)
-      || document.body.getAttribute(`data-date-format`)
-      || `yyyy-mm-dd`;
-
-    this.localeText = this.getLocaleText();
-
-    Object.defineProperties(
-      this.element,
-      {
-        'valueAsDate': {
-          get: () => {
-            if(!this.element.value) {
-              return null;
-            }
-            const format = this.format || 'yyyy-mm-dd';
-            const parts = this.element.value.match(/(\d+)/g);
-            let i = 0, fmt = {};
-
-            format.replace(/(yyyy|dd|mm)/g, part=> {
-              fmt[part] = i++;
-            });
-            return new Date(parts[fmt['yyyy']], parts[fmt['mm']]-1, parts[fmt['dd']]);
-          },
-          set: val => {
-            this.element.value = dateFormat(val, this.format);
-          }
-        },
-        'valueAsNumber': {
-          get: ()=> {
-            if(!this.element.value) {
-              return NaN;
-            }
-
-            return this.element.valueAsDate.valueOf();
-          },
-          set: val=> {
-            this.element.valueAsDate = new Date(val);
-          }
+    const selectRange = () => {
+      if (this.element.setSelectionRange) {
+        if (this.element.selectedPart == 0) {
+          this.element.setSelectionRange(0, 2);
+        } else if (this.element.selectedPart == 1) {
+          this.element.setSelectionRange(3, 5);
         }
       }
-    );
+    };
+
+    Object.defineProperties(this.element, {
+      selectedPart: {
+        get: () => {
+          return selectedPart;
+        },
+        set: (val) => {
+          selectedPart = val;
+        },
+      },
+      valueAsTime: {
+        get: () => {
+          if (!this.element.value) {
+            return null;
+          }
+          const parts = this.element.value.split(":");
+
+          return {
+            hour: parseInt(parts[0], 10) || 0,
+            minute: parseInt(parts[1], 10) || 0,
+          };
+        },
+        set: (val) => {
+          var newVal = "";
+          if (typeof val.hour !== "undefined") {
+            newVal += Math.max(Math.min(val.hour, 23), 0)
+              .toString()
+              .padStart(2, "0");
+          } else {
+            newVal += "--";
+          }
+          newVal += ":";
+          if (typeof val.minute !== "undefined") {
+            newVal += Math.max(Math.min(val.minute, 59), 0)
+              .toString()
+              .padStart(2, "0");
+          } else {
+            newVal += "--";
+          }
+          this.element.value = newVal;
+          selectRange();
+        },
+      },
+    });
 
     // Open the picker when the input get focus,
     // also on various click events to capture it in all corner cases.
     const showPicker = (e) => {
       const elm = this.element;
-      elm.locale = this.localeText;
-      const didAttach = thePicker.attachTo(elm);
+      const didAttach = timePicker.attachTo(elm);
+      selectedPart = elm.selectionStart < 3 ? 0 : 1;
+      selectRange();
     };
     this.element.addEventListener(`focus`, showPicker);
     this.element.addEventListener(`mouseup`, showPicker);
 
     // Update the picker if the date changed manually in the input.
-    this.element.addEventListener(`keydown`, e => {
-      const date = new Date();
-
-      switch(e.keyCode) {
+    this.element.addEventListener(`keydown`, (e) => {
+      let time = { hour: null, minute: null };
+      switch (e.keyCode) {
         case 9:
         case 27:
-          thePicker.hide();
+        case 13:
+          timePicker.hide();
           break;
         case 38:
-          if(this.element.valueAsDate) {
-            date.setDate(this.element.valueAsDate.getDate() + 1);
-            this.element.valueAsDate = date;
-            thePicker.pingInput();
+          if (this.element.valueAsTime) {
+            time = {
+              hour:
+                this.element.valueAsTime.hour -
+                (this.element.selectedPart == 0 ? 1 : 0),
+              minute:
+                this.element.valueAsTime.minute -
+                (this.element.selectedPart == 1 ? 1 : 0),
+            };
+            this.element.valueAsTime = time;
+            timePicker.pingInput();
+            e.preventDefault();
+            return false;
           }
           break;
         case 40:
-          if(this.element.valueAsDate) {
-            date.setDate(this.element.valueAsDate.getDate() - 1);
-            this.element.valueAsDate = date;
-            thePicker.pingInput();
+          if (this.element.valueAsTime) {
+            time = {
+              hour:
+                this.element.valueAsTime.hour +
+                (this.element.selectedPart == 0 ? 1 : 0),
+              minute:
+                this.element.valueAsTime.minute +
+                (this.element.selectedPart == 1 ? 1 : 0),
+            };
+            this.element.valueAsTime = time;
+            timePicker.pingInput();
+            e.preventDefault();
+            return false;
           }
           break;
-        default:
+        case 37:
+          if (this.element.valueAsTime) {
+            this.element.selectedPart = 0;
+            this.element.valueAsTime = this.element.valueAsTime;
+            e.preventDefault();
+            return false;
+          }
+          break;
+        case 39:
+          if (this.element.valueAsTime) {
+            this.element.selectedPart = 1;
+            this.element.valueAsTime = this.element.valueAsTime;
+            e.preventDefault();
+            return false;
+          }
           break;
       }
 
-      thePicker.sync();
+      timePicker.sync();
     });
 
-    this.element.addEventListener(`keyup`, e => {
-      thePicker.sync();
+    this.element.addEventListener(`keyup`, (e) => {
+      timePicker.sync();
     });
-  }
 
-  getLocaleText() {
-    const locale = this.locale.toLowerCase();
-
-    for(const localeSet in locales) {
-      const localeList = localeSet.split(`_`);
-      localeList.map(el=>el.toLowerCase());
-
-      if(
-        !!~localeList.indexOf(locale)
-        || !!~localeList.indexOf(locale.substr(0,2))
-      ) {
-        return locales[localeSet];
-      }
+    if (this.element.value.length == 0) {
+      this.element.valueAsTime = {};
     }
   }
 
   // Return false if the browser does not support input[type="date"].
-  static supportsDateInput() {
+  static supportsTimeInput() {
     const input = document.createElement(`input`);
-    input.setAttribute(`type`, `date`);
+    input.setAttribute(`type`, `time`);
 
-    const notADateValue = `not-a-date`;
+    const notADateValue = `not-a-time`;
     input.setAttribute(`value`, notADateValue);
 
     return !(input.value === notADateValue);
   }
 
   // Will add the Picker to all inputs in the page.
-  static addPickerToDateInputs() {
-    // Get and loop all the input[type="date"]s in the page that do not have `[data-has-picker]` yet.
-    const dateInputs = document.querySelectorAll(`input[type="date"]:not([data-has-picker])`);
-    const length = dateInputs.length;
+  static addPickerToTimeInputs() {
+    // Get and loop all the input[type="time"]s in the page that do not have `[data-has-picker]` yet.
+    const timeInputs = document.querySelectorAll(
+      `input[type="time"]:not([data-has-picker])`
+    );
+    const length = timeInputs.length;
 
-    if(!length) {
+    if (!length) {
       return false;
     }
 
-    for(let i = 0; i < length; ++i) {
-      new Input(dateInputs[i]);
+    for (let i = 0; i < length; ++i) {
+      new Input(timeInputs[i]);
     }
   }
 
   static addPickerToOtherInputs() {
-    // Get and loop all the input[type="text"] class date-polyfill in the page that do not have `[data-has-picker]` yet.
-    const dateInputs = document.querySelectorAll(`input[type="text"].date-polyfill:not([data-has-picker])`);
-    const length = dateInputs.length;
+    // Get and loop all the input[type="text"] class time-polyfill in the page that do not have `[data-has-picker]` yet.
+    const timeInputs = document.querySelectorAll(
+      `input[type="text"].time-polyfill:not([data-has-picker])`
+    );
+    const length = timeInputs.length;
 
-    if(!length) {
+    if (!length) {
       return false;
     }
 
-    for(let i = 0; i < length; ++i) {
-      new Input(dateInputs[i]);
+    for (let i = 0; i < length; ++i) {
+      new Input(timeInputs[i]);
     }
   }
 }

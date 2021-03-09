@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 
 module.exports = {
-  entry: './date-input-polyfill.js',
+  entry: './time-input-polyfill.js',
 
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
@@ -44,7 +44,7 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   output: {
     path: process.cwd()+'/',
-    filename: 'date-input-polyfill.dist.js',
+    filename: 'time-input-polyfill.dist.js',
     libraryTarget: 'umd'
   }
 };

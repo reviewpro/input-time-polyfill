@@ -1,15 +1,15 @@
-import './date-input-polyfill.scss';
+import './time-input-polyfill.scss';
 import Input from './input.js';
 
 const addPickers = () => {
   Input.addPickerToOtherInputs();
-  // Check if type="date" is supported.
-  if(!Input.supportsDateInput()) {
-    Input.addPickerToDateInputs();
+  // Check if type="time" is supported.
+  if(!Input.supportsTimeInput()) {
+    Input.addPickerToTimeInputs();
   }
 };
 
-// Run the above code on any <input type="date"> in the document, also on dynamically created ones.
+// Run the above code on any <input type="time"> in the document, also on dynamically created ones.
 addPickers();
 
 document.addEventListener(`DOMContentLoaded`, () => {
