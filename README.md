@@ -4,6 +4,8 @@ Use this for IE and Safari support or for standardize UI behaviour.
 
 Support dynamically created inputs, so can be used in single page applications.
 
+**Demo available here**: https://jsfiddle.net/pava91/x4euhaf7/
+
 ## Install
 `npm install --save input-time-polyfill`
 
