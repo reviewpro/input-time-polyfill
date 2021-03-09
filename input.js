@@ -1,4 +1,5 @@
 import timePicker from "./timePicker";
+import "core-js/features/string/pad-start";
 
 export default class Input {
   constructor(input) {

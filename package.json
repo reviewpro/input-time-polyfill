@@ -24,16 +24,12 @@
     "timepicker",
     "polyfill"
   ],
-  "browserslist": [
-    ">0.2%"
-  ],
   "analyze": true,
   "license": "MIT",
   "devDependencies": {
     "@babel/plugin-proposal-object-rest-spread": "^7.13.8",
     "@babel/plugin-transform-modules-umd": "^7.13.0",
     "@babel/preset-env": "^7.13.10",
-    "@babel/runtime-corejs3": "^7.13.10",
     "babel-loader": "^8.2.2",
     "css-loader": "^0.25.0",
     "eslint": "^3.7.1",
@@ -45,7 +41,8 @@
   },
   "dependencies": {
     "@babel/cli": "^7.13.10",
-    "@babel/core": "^7.13.10"
+    "@babel/core": "^7.13.10",
+    "core-js": "^3.9.1"
   },
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server",
