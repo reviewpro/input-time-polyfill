@@ -1,6 +1,6 @@
 {
   "name": "input-time-polyfill",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Automatically adds timepickers to input[type=time] on IE and OS X Safari.",
   "main": "input-time-polyfill.dist.js",
   "contributors": [
@@ -37,13 +37,12 @@
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.2"
-  },
-  "dependencies": {
+    "webpack-dev-server": "^1.16.2",
     "@babel/cli": "^7.13.10",
     "@babel/core": "^7.13.10",
     "core-js": "^3.9.1"
   },
+  "dependencies": {},
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server",
     "build": "./node_modules/.bin/webpack"
