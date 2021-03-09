@@ -1,8 +1,8 @@
 {
-  "name": "time-input-polyfill",
+  "name": "input-time-polyfill",
   "version": "1.0.0",
   "description": "Automatically adds timepickers to input[type=time] on IE and OS X Safari.",
-  "main": "time-input-polyfill.dist.js",
+  "main": "input-time-polyfill.dist.js",
   "contributors": [
     {
       "name": "Pavanello Emanuele",
@@ -11,9 +11,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/epavanello/time-input-polyfill.git"
+    "url": "git://github.com/epavanello/input-time-polyfill.git"
   },
-  "bugs": "https://github.com/epavanello/time-input-polyfill/issues",
+  "bugs": "https://github.com/epavanello/input-time-polyfill/issues",
   "keywords": [
     "html5",
     "light",

@@ -15,7 +15,7 @@ class TimePicker {
 
     // The picker element. Unique tag name attempts to protect against
     // generic selectors.
-    this.container = document.createElement(`time-input-polyfill`);
+    this.container = document.createElement(`input-time-polyfill`);
 
     // Add controls.
     // Hours picker.

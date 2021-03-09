@@ -1,4 +1,4 @@
-import "./time-input-polyfill.scss";
+import "./input-time-polyfill.scss";
 import { addPickerToOtherInputs, supportsTimeInput, addPickerToTimeInputs } from "./input";
 
 const addPickers = () => {

@@ -58,15 +58,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (true) {
 	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1), __webpack_require__(5)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  } else if (typeof exports !== "undefined") {
-	    factory(require("./time-input-polyfill.scss"), require("./input"));
+	    factory(require("./input-time-polyfill.scss"), require("./input"));
 	  } else {
 	    var mod = {
 	      exports: {}
 	    };
-	    factory(global.timeInputPolyfill, global.input);
-	    global.timeInputPolyfill = mod.exports;
+	    factory(global.inputTimePolyfill, global.input);
+	    global.inputTimePolyfill = mod.exports;
 	  }
-	})(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : this, function (_timeInputPolyfill, _input) {
+	})(typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : this, function (_inputTimePolyfill, _input) {
 	  "use strict";
 
 	  var addPickers = function addPickers() {
@@ -105,8 +105,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./node_modules/css-loader/index.js!./node_modules/sass-loader/index.js!./time-input-polyfill.scss", function() {
-				var newContent = require("!!./node_modules/css-loader/index.js!./node_modules/sass-loader/index.js!./time-input-polyfill.scss");
+			module.hot.accept("!!./node_modules/css-loader/index.js!./node_modules/sass-loader/index.js!./input-time-polyfill.scss", function() {
+				var newContent = require("!!./node_modules/css-loader/index.js!./node_modules/sass-loader/index.js!./input-time-polyfill.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -124,7 +124,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 	// module
-	exports.push([module.id, "time-input-polyfill {\n  background: #fff;\n  color: #000;\n  text-shadow: none;\n  border: 0;\n  padding: 0;\n  height: auto;\n  width: auto;\n  line-height: normal;\n  font-family: sans-serif;\n  font-size: 14px;\n  position: absolute !important;\n  text-align: center;\n  box-shadow: 0px 3px 10px 1px rgba(0, 0, 0, 0.22);\n  cursor: default;\n  z-index: 1;\n  border-radius: 5px;\n  -moz-border-radius: 5px;\n  -webkit-border-radius: 5px;\n  overflow: hidden;\n  display: block; }\n  time-input-polyfill[data-open=\"false\"] {\n    visibility: hidden;\n    z-index: -100 !important;\n    top: 0; }\n  time-input-polyfill[data-open=\"true\"] {\n    visibility: visible; }\n  time-input-polyfill select {\n    background: #fff;\n    color: #000;\n    text-shadow: none;\n    border: 0;\n    padding: 0;\n    height: auto;\n    width: auto;\n    line-height: normal;\n    font-family: sans-serif;\n    font-size: 14px;\n    box-shadow: none;\n    font-family: \"Lato\", Helvetica, Arial, sans-serif;\n    display: inline-block;\n    border: 0;\n    border-radius: 0;\n    border-bottom: 1px solid #dadfe1;\n    height: 200px;\n    vertical-align: top;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    overflow: overlay;\n    width: 80px;\n    padding: 4px; }\n    time-input-polyfill select:first-of-type {\n      border-right: 1px solid #dadfe1;\n      border-radius: 5px 0 0 0;\n      -moz-border-radius: 5px 0 0 0;\n      -webkit-border-radius: 5px 0 0 0; }\n    time-input-polyfill select > option {\n      text-align: center;\n      font-size: 12px;\n      padding: 8px; }\n      time-input-polyfill select > option:hover {\n        background-color: #ddd; }\n  time-input-polyfill [data-selected] {\n    font-weight: bold;\n    background: #d8eaf6; }\n  time-input-polyfill ::-webkit-scrollbar {\n    width: 0px;\n    height: 0px; }\n  time-input-polyfill ::-webkit-scrollbar-thumb {\n    background: transparent; }\n  time-input-polyfill ::-webkit-scrollbar-track {\n    background: transparent; }\n\n.time-polyfill {\n  font-family: monospace;\n  width: 40px; }\n", ""]);
+	exports.push([module.id, "input-time-polyfill {\n  background: #fff;\n  color: #000;\n  text-shadow: none;\n  border: 0;\n  padding: 0;\n  height: auto;\n  width: auto;\n  line-height: normal;\n  font-family: sans-serif;\n  font-size: 14px;\n  position: absolute !important;\n  text-align: center;\n  box-shadow: 0px 3px 10px 1px rgba(0, 0, 0, 0.22);\n  cursor: default;\n  z-index: 1;\n  border-radius: 5px;\n  -moz-border-radius: 5px;\n  -webkit-border-radius: 5px;\n  overflow: hidden;\n  display: block; }\n  input-time-polyfill[data-open=\"false\"] {\n    visibility: hidden;\n    z-index: -100 !important;\n    top: 0; }\n  input-time-polyfill[data-open=\"true\"] {\n    visibility: visible; }\n  input-time-polyfill select {\n    background: #fff;\n    color: #000;\n    text-shadow: none;\n    border: 0;\n    padding: 0;\n    height: auto;\n    width: auto;\n    line-height: normal;\n    font-family: sans-serif;\n    font-size: 14px;\n    box-shadow: none;\n    font-family: \"Lato\", Helvetica, Arial, sans-serif;\n    display: inline-block;\n    border: 0;\n    border-radius: 0;\n    border-bottom: 1px solid #dadfe1;\n    height: 200px;\n    vertical-align: top;\n    -webkit-appearance: none;\n    -moz-appearance: none;\n    overflow: overlay;\n    width: 80px;\n    padding: 4px; }\n    input-time-polyfill select:first-of-type {\n      border-right: 1px solid #dadfe1;\n      border-radius: 5px 0 0 0;\n      -moz-border-radius: 5px 0 0 0;\n      -webkit-border-radius: 5px 0 0 0; }\n    input-time-polyfill select > option {\n      text-align: center;\n      font-size: 12px;\n      padding: 8px; }\n      input-time-polyfill select > option:hover {\n        background-color: #ddd; }\n  input-time-polyfill [data-selected] {\n    font-weight: bold;\n    background: #d8eaf6; }\n  input-time-polyfill ::-webkit-scrollbar {\n    width: 0px;\n    height: 0px; }\n  input-time-polyfill ::-webkit-scrollbar-thumb {\n    background: transparent; }\n  input-time-polyfill ::-webkit-scrollbar-track {\n    background: transparent; }\n\n.time-polyfill {\n  font-family: monospace;\n  width: 40px; }\n", ""]);
 
 	// exports
 
@@ -740,7 +740,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }; // The picker element. Unique tag name attempts to protect against
 	      // generic selectors.
 
-	      this.container = document.createElement("time-input-polyfill"); // Add controls.
+	      this.container = document.createElement("input-time-polyfill"); // Add controls.
 	      // Hours picker.
 
 	      this.hour = document.createElement("select");

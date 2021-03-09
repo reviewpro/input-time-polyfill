@@ -1,7 +1,7 @@
 var webpack = require("webpack");
 
 module.exports = {
-  entry: "./time-input-polyfill.js",
+  entry: "./input-time-polyfill.js",
   resolve: {
     extensions: ["", ".js"],
   },
@@ -26,7 +26,7 @@ module.exports = {
   },
   output: {
     path: process.cwd() + "/",
-    filename: "time-input-polyfill.dist.js",
+    filename: "input-time-polyfill.dist.js",
     libraryTarget: "umd",
   },
 };
