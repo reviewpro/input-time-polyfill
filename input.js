@@ -1,4 +1,4 @@
-import timePicker from "./timePicker.js";
+import timePicker from "./timePicker";
 
 export default class Input {
   constructor(input) {
@@ -143,48 +143,48 @@ export default class Input {
       this.element.valueAsTime = {};
     }
   }
+}
 
-  // Return false if the browser does not support input[type="date"].
-  static supportsTimeInput() {
-    const input = document.createElement(`input`);
-    input.setAttribute(`type`, `time`);
+// Return false if the browser does not support input[type="date"].
+export function supportsTimeInput() {
+  const input = document.createElement(`input`);
+  input.setAttribute(`type`, `time`);
 
-    const notADateValue = `not-a-time`;
-    input.setAttribute(`value`, notADateValue);
+  const notADateValue = `not-a-time`;
+  input.setAttribute(`value`, notADateValue);
 
-    return !(input.value === notADateValue);
+  return !(input.value === notADateValue);
+}
+
+// Will add the Picker to all inputs in the page.
+export function addPickerToTimeInputs() {
+  // Get and loop all the input[type="time"]s in the page that do not have `[data-has-picker]` yet.
+  const timeInputs = document.querySelectorAll(
+    `input[type="time"]:not([data-has-picker])`
+  );
+  const length = timeInputs.length;
+
+  if (!length) {
+    return false;
   }
 
-  // Will add the Picker to all inputs in the page.
-  static addPickerToTimeInputs() {
-    // Get and loop all the input[type="time"]s in the page that do not have `[data-has-picker]` yet.
-    const timeInputs = document.querySelectorAll(
-      `input[type="time"]:not([data-has-picker])`
-    );
-    const length = timeInputs.length;
+  for (let i = 0; i < length; ++i) {
+    new Input(timeInputs[i]);
+  }
+}
 
-    if (!length) {
-      return false;
-    }
+export function addPickerToOtherInputs() {
+  // Get and loop all the input[type="text"] class time-polyfill in the page that do not have `[data-has-picker]` yet.
+  const timeInputs = document.querySelectorAll(
+    `input[type="text"].time-polyfill:not([data-has-picker])`
+  );
+  const length = timeInputs.length;
 
-    for (let i = 0; i < length; ++i) {
-      new Input(timeInputs[i]);
-    }
+  if (!length) {
+    return false;
   }
 
-  static addPickerToOtherInputs() {
-    // Get and loop all the input[type="text"] class time-polyfill in the page that do not have `[data-has-picker]` yet.
-    const timeInputs = document.querySelectorAll(
-      `input[type="text"].time-polyfill:not([data-has-picker])`
-    );
-    const length = timeInputs.length;
-
-    if (!length) {
-      return false;
-    }
-
-    for (let i = 0; i < length; ++i) {
-      new Input(timeInputs[i]);
-    }
+  for (let i = 0; i < length; ++i) {
+    new Input(timeInputs[i]);
   }
 }

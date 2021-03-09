@@ -1,11 +1,11 @@
-import './time-input-polyfill.scss';
-import Input from './input.js';
+import "./time-input-polyfill.scss";
+import { addPickerToOtherInputs, supportsTimeInput, addPickerToTimeInputs } from "./input";
 
 const addPickers = () => {
-  Input.addPickerToOtherInputs();
+  addPickerToOtherInputs();
   // Check if type="time" is supported.
-  if(!Input.supportsTimeInput()) {
-    Input.addPickerToTimeInputs();
+  if (!supportsTimeInput()) {
+    addPickerToTimeInputs();
   }
 };
 
