@@ -4,7 +4,9 @@ Use this for IE and Safari support or for standardize UI behaviour.
 
 Support dynamically created inputs, so can be used in single page applications.
 
-**Demo available here**: https://jsfiddle.net/pava91/x4euhaf7/
+Forked from [date-input-polyfill](https://github.com/jcgertig/date-input-polyfill). Continuing and fixed as a separate project.
+
+**Demo available here**: https://codepen.io/epavanello/full/RwoqVvx
 
 ## Install
 `npm install --save input-time-polyfill`
