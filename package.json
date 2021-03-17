@@ -46,6 +46,6 @@
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server",
     "build": "./node_modules/.bin/webpack",
-    "publish": "npm version patch && npm publish"
+    "patch": "npm version patch"
   }
 }
