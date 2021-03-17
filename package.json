@@ -1,6 +1,6 @@
 {
   "name": "input-time-polyfill",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Automatically adds timepickers to input[type=time] on IE and OS X Safari.",
   "main": "input-time-polyfill.dist.js",
   "contributors": [
