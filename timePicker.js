@@ -157,11 +157,29 @@ class TimePicker {
   setInput(hide) {
     this.input.valueAsTime = this.time;
     this.input.focus();
+
     if (hide) {
       setTimeout(() => {
         // IE wouldn't hide, so in a timeout you go.
         this.hide();
       }, 100);
+    }
+
+    const value = `${this.time.hour}:${this.time.minute}`;
+    const valueSetter = Object.getOwnPropertyDescriptor(
+      this.input,
+      'value',
+    ).set;
+    const prototype = Object.getPrototypeOf(this.input);
+    const prototypeValueSetter = Object.getOwnPropertyDescriptor(
+      prototype,
+      'value',
+    ).set;
+
+    if (valueSetter && valueSetter !== prototypeValueSetter) {
+      prototypeValueSetter.call(this.input, value);
+    } else {
+      valueSetter.call(this.input, value);
     }
 
     this.pingInput();
@@ -174,8 +192,8 @@ class TimePicker {
 
     // Modern event creation.
     try {
-      inputEvent = new Event(`input`);
-      changeEvent = new Event(`change`);
+      inputEvent = new Event(`input`, { bubbles: true, cancelable: false });
+      changeEvent = new Event(`change`, { bubbles: true, cancelable: false });
     } catch (e) {
       // Old-fashioned way.
       inputEvent = document.createEvent(`KeyboardEvent`);
