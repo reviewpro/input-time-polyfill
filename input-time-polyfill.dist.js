@@ -892,6 +892,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	          }, 100);
 	        }
 
+	        var value = "".concat(this.time.hour, ":").concat(this.time.minute);
+	        var valueSetter = Object.getOwnPropertyDescriptor(this.input, 'value').set;
+	        var prototype = Object.getPrototypeOf(this.input);
+	        var prototypeValueSetter = Object.getOwnPropertyDescriptor(prototype, 'value').set;
+
+	        if (valueSetter && valueSetter !== prototypeValueSetter) {
+	          prototypeValueSetter.call(this.input, value);
+	        } else {
+	          valueSetter.call(this.input, value);
+	        }
+
 	        this.pingInput();
 	      }
 	    }, {
@@ -902,8 +913,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var changeEvent; // Modern event creation.
 
 	        try {
-	          inputEvent = new Event("input");
-	          changeEvent = new Event("change");
+	          inputEvent = new Event("input", {
+	            bubbles: true,
+	            cancelable: false
+	          });
+	          changeEvent = new Event("change", {
+	            bubbles: true,
+	            cancelable: false
+	          });
 	        } catch (e) {
 	          // Old-fashioned way.
 	          inputEvent = document.createEvent("KeyboardEvent");
