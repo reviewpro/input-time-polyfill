@@ -5,15 +5,15 @@
   "main": "input-time-polyfill.dist.js",
   "contributors": [
     {
-      "name": "Pavanello Emanuele",
-      "email": "pavanello.emanuele@gmail.com"
+      "name": "Miguel Sánchez",
+      "email": "miguel.sanchez@shijigroup.com"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/epavanello/input-time-polyfill.git"
+    "url": "git://github.com/reviewpro/input-time-polyfill.git"
   },
-  "bugs": "https://github.com/epavanello/input-time-polyfill/issues",
+  "bugs": "https://https://github.com/reviewpro/input-time-polyfill/issues",
   "keywords": [
     "html5",
     "light",

@@ -4,9 +4,9 @@ Use this for IE and Safari support or for standardize UI behaviour.
 
 Support dynamically created inputs, so can be used in single page applications.
 
-Forked from [date-input-polyfill](https://github.com/jcgertig/date-input-polyfill). Continuing and fixed as a separate project.
+Forked from [date-input-polyfill](https://github.com/epavanello/date-input-polyfill). Continuing and fixed as a separate project.
 
-**Demo available here**: https://codepen.io/epavanello/pen/RwoqVvx
+As difference from the other forks, this adds the setters for the fields. More [info](https://github.com/facebook/react/issues/10135#issuecomment-314441175)
 
 ## Install
 `npm install --save input-time-polyfill`
