@@ -9,3 +9,8 @@ dist/
 
 .DS_Store
 Thumbs.db
+
+# Editor files
+# Sublime related files
+*.sublime-workspace
+*.sublime-project
